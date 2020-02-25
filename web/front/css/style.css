@@ -494,7 +494,7 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 	-moz-transition-duration:600ms; -webkit-transition-duration:600ms; -o-transition-duration:600ms; -ms-transition-duration:600ms; transition-duration: 600ms;
 	-moz-transition-property:all; -webkit-transition-property:all; -o-transition-property:all; -ms-transition-property:all; transition-property:all; 
 	-moz-transition-timing-function:ease-out; -webkit-transition-timing-function: ease-out; -o-transition-timing-function:ease-out; -ms-transition-timing-function:ease-out; transition-timing-function:ease-out;*/
-	-webkit-transition:all .5s; -moz-transition:all .5s; -o-transform:all .5s; -ms-transform:all .5s; transition:all .5s;
+	-webkit-transition:all .5s; -moz-transition:all .5s;
 }
 .h_l_img:hover img{	
 	-moz-transform:scale(1.1,1.1); -webkit-transform:scale(1.1,1.1); -o-transform:scale(1.1,1.1); -ms-transform:scale(1.1,1.1); transform:scale(1.1,1.1);
