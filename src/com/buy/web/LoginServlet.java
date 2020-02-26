@@ -51,7 +51,7 @@ public class LoginServlet extends AbstractServlet {
         ReturnResult result = new ReturnResult();
 
         //获取参数：在登录页面输入的用户名和密码
-        String loginName = request.getParameter("loginName");//
+        String loginName = request.getParameter("loginName");
         String password = request.getParameter("password");
         //根据loginName获取用户对象
         EasybuyUser user = userService.getUserByloginName(loginName);
@@ -69,6 +69,22 @@ public class LoginServlet extends AbstractServlet {
             }
         }
         return result;
+    }
+
+    /**
+     * 用户注销
+     * @param request
+     * @param response
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public String loginOut(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException {
+        ReturnResult result=new ReturnResult();
+        //删除session中用户的记录
+        request.getSession().removeAttribute("loginUser");
+        //
+        return "/front/home";
     }
 
 
