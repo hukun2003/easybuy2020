@@ -12,4 +12,9 @@ public class UserServiceImpl implements IUserService{
     public EasybuyUser getUserByloginName(String loginName) throws SQLException, ClassNotFoundException {
         return userDao.getUserByloginName(loginName);
     }
+
+    @Override
+    public boolean save(EasybuyUser user) {
+        return userDao.save(user)>0?true:false;
+    }
 }

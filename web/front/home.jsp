@@ -139,7 +139,7 @@
                     </a>&nbsp; <a href="${ctx}/front/regist.jsp" style="color:#ff4e00;">免费注册
                 </c:if>
                 <c:if test="${sessionScope.loginUser != null}">
-                    用户<a href="" style="color: #0071c6">${sessionScope.loginUser.loginname}</a>登录&nbsp;
+                    用户<a href="" style="color: #0071c6">【${sessionScope.loginUser.loginname}】</a>登录&nbsp;
                     <a href="login?action=loginOut">注销</a>
                 </c:if>
                 </a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|
@@ -558,11 +558,14 @@
                 <span class="fr"><a href="#">更多 ></a></span>新闻资讯
             </div>
             <ul>
-                <li><span>[ 特惠 ]</span><a href="#">掬一轮明月 表无尽惦念</a></li>
-                <li><span>[ 公告 ]</span><a href="#">好奇金装成长裤新品上市</a></li>
+                <c:forEach var="news" items="${sessionScope.newsList}">
+                    <li><span>[ 特惠 ]</span><a href="#">${news.title}</a></li>
+                </c:forEach>
+
+                <%--<li><span>[ 公告 ]</span><a href="#">好奇金装成长裤新品上市</a></li>
                 <li><span>[ 特惠 ]</span><a href="#">大牌闪购 · 抢！</a></li>
                 <li><span>[ 公告 ]</span><a href="#">发福利 买车就抢千元油卡</a></li>
-                <li><span>[ 公告 ]</span><a href="#">家电低至五折</a></li>
+                <li><span>[ 公告 ]</span><a href="#">家电低至五折</a></li>--%>
             </ul>
             <div class="charge_t">
                 话费充值

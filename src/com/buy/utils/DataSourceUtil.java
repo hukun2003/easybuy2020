@@ -2,10 +2,7 @@ package com.buy.utils;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * @Author: laoyu
@@ -101,7 +98,7 @@ public class DataSourceUtil {
         int num = 0;
         /* 处理SQL,执行SQL */
         try {
-            getConn(); // 得到数据库连接
+            conn=getConn(); // 得到数据库连接
             pstmt = conn.prepareStatement(sql); // 得到PreparedStatement对象
             if (param != null) {
                 for (int i = 0; i < param.length; i++) {
@@ -119,7 +116,7 @@ public class DataSourceUtil {
 
     public ResultSet executeQuery(String preparedSql, Object... param) throws ClassNotFoundException, SQLException {
         try {
-            getConn(); // 得到数据库连接
+            conn=getConn(); // 得到数据库连接
             pstmt = conn.prepareStatement(preparedSql);// 得到PreparedStatement对象
             if (param != null) {
                 for (int i = 0; i < param.length; i++) {
@@ -170,5 +167,32 @@ public class DataSourceUtil {
             }
         }
     }
+
+    public int executeInsert(String sql,Object... params){
+        Long id=0L;
+        /* 处理SQL,执行SQL */
+        try {
+            conn=getConn(); // 得到数据库连接
+            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); // 得到PreparedStatement对象
+            if (params != null) {
+                for (int i = 0; i < params.length; i++) {
+                    pstmt.setObject(i + 1, params[i]); // 为预编译sql设置参数
+                }
+            }
+            pstmt.executeUpdate();
+             ResultSet rs= pstmt.getGeneratedKeys(); // 执行SQL语句
+            if (rs.next()){
+                id=rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // 处理SQLException异常
+        } finally {
+            this.closeAll(conn, pstmt, null);
+        }
+        return id.intValue();
+    }
+
+
+
 
 }
