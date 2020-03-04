@@ -49,16 +49,20 @@ public class RegisterServlet extends AbstractServlet {
             user.setMobile(request.getParameter("mobile"));
             user.setType(Constants.UserType.PRE);
             result=checkUser(user);
+            System.out.println(result.getStatus());
             //是否验证通过
             if(result.getStatus()==Constants.ReturnResult.SUCCESS){
                 if(!userService.save(user)){
                     return result.returnFail("注册失败！");
                 }
+            }else{
+                return result;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         result.returnSuccess("注册成功");
+        System.out.println("成功");
         return result;
     }
 
@@ -73,16 +77,19 @@ public class RegisterServlet extends AbstractServlet {
         if (EmptyUtils.isNotEmpty(user.getMobile())) {
             if (!RegUtils.checkMobile(user.getMobile())){
                 result.returnFail("手机格式不正确");
+                return result;
             }
         }
         if (EmptyUtils.isNotEmpty(user.getIdentitycode())) {
-            if (!RegUtils.checkMobile(user.getIdentitycode())){
+            if (!RegUtils.checkIdentityCodeReg(user.getIdentitycode())){
                 result.returnFail("身份证格式不正确");
+                return result;
             }
         }
         if (EmptyUtils.isNotEmpty(user.getEmail())) {
-            if (!RegUtils.checkMobile(user.getEmail())){
+            if (!RegUtils.checkEmail(user.getEmail())){
                 result.returnFail("邮箱格式不正确");
+                return result;
             }
         }
         return result.returnSuccess();

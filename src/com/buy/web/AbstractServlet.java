@@ -78,6 +78,7 @@ public abstract class AbstractServlet extends HttpServlet {
                 request.getRequestDispatcher(viewName).forward(request, response);
             } else {//返回的是json数据
                 PrintUtil.write(result, response);
+                System.out.println("json");
             }
         }
     }

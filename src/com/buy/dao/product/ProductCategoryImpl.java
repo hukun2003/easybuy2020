@@ -64,6 +64,8 @@ public class ProductCategoryImpl implements IProductCategory {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            DataSourceUtil.closeConnection(this.conn);
         }
 
         return productCategories;
@@ -78,7 +80,7 @@ public class ProductCategoryImpl implements IProductCategory {
         //查询一级分类的列表
         List<ProductCategoryVo> pc1VoList = new ArrayList<ProductCategoryVo>();
         //查询一级分类
-        List<EasybuyProductCategory> pcList = queryAllProductCategory(null);
+        List<EasybuyProductCategory> pcList = queryAllProductCategory("0");
         //查询二级分类
         for (EasybuyProductCategory productCategory1 : pcList) {
             ProductCategoryVo pc1Vo = new ProductCategoryVo();
@@ -105,7 +107,7 @@ public class ProductCategoryImpl implements IProductCategory {
                 pc2Vo.setProductCategoryVoList(pc3VoList);
                 pc2VoList.add(pc2Vo);
             }
-            pc1Vo.setProductCategoryVoList(pc1VoList);
+            pc1Vo.setProductCategoryVoList(pc2VoList);
             pc1VoList.add(pc1Vo);
         }
         return pc1VoList ;

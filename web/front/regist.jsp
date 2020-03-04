@@ -194,24 +194,24 @@
             return;
         }
         //验证邮箱格式
-        if(email!=null && email!="" && !checkMail(email)){
-            alert("邮箱格式不正确");
+        if(email==null || email==""){
+            alert("邮箱不能为空");
             return;
         }
         //验证邮箱格式
-        if(mobile!=null && mobile!="" && !checkMobile(mobile)){
-            alert("手机格式不正确");
+        if(mobile==null || mobile==""){
+            alert("手机号不能为空");
             return;
         }
         //验证邮箱格式
-        if(identityCode!=null && identityCode!="" && !checkIdentityCode(identityCode)){
-            alert("身份证号格式不正确");
+        if(identityCode==null || identityCode=="" ){
+            alert("身份证号不能为空");
             return;
         }
-
         $.ajax({
             url:   "${ctx}/register",
             method: "post",
+            dataType:"json",
             data: {
                 loginName: loginName,
                 userName: userName,
@@ -225,7 +225,7 @@
             success: function (jsonStr) {
                 if (jsonStr.status == 1) {
                     alert(jsonStr.message);
-                    window.location.href = contextPath + "/Login?action=toLogin";
+                    window.location.href ="${ctx}/front/login.jsp";
                 } else {
                     alert(jsonStr.message);
                 }
@@ -234,31 +234,6 @@
     }
 
 
-    function checkMail(mail) {
-        var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (filter.test(mail))
-            return true;
-        else {
-            return false;}
-    }
-
-    function checkMobile(phone) {
-        var filter  = /^\d{5,11}$/;
-        if (filter.test(phone))
-            return true;
-        else {
-            return false;
-        }
-    }
-
-    function checkIdentityCode(identityCode) {
-        var filter  = /^\w{18}$/;
-        if (filter.test(identityCode))
-            return true;
-        else {
-            return false;
-        }
-    }
 
 </script>
 

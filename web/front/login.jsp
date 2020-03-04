@@ -127,6 +127,7 @@
                data:{"loginName":$user,"password":$pwd,"action":"login"},
                success:function (json) {
                     if (json.status==1){
+                        // alert(json.message)
                         window.location.href="${ctx}/home?action=index";
                     }else {
                         alert("用户名或密码错误");
