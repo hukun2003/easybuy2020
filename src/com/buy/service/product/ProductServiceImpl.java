@@ -24,4 +24,9 @@ public class ProductServiceImpl extends DataSourceUtil implements IProductServic
     public int queryProductCount(ProductParams params) {
         return productDao.queryProductCount(params);
     }
+
+    @Override
+    public EasybuyProduct findProductById(String id) {
+        return productDao.findProductById(id);
+    }
 }

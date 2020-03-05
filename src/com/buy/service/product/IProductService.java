@@ -11,6 +11,7 @@ import java.util.List;
 public interface IProductService {
     /**
      * 根据条件查询商品列表
+     *
      * @param params
      * @return
      */
@@ -18,9 +19,11 @@ public interface IProductService {
 
     /**
      * 根据条件查询商品的数量
+     *
      * @param params
      * @return
      */
     int queryProductCount(ProductParams params);
 
+    EasybuyProduct findProductById(String id);
 }

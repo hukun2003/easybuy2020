@@ -23,4 +23,14 @@ public interface IProductDao {
      */
     int queryProductCount(ProductParams params);
 
+    /**
+     * 根据商品id查询指定的商品信息
+     * @param id
+     * @return
+     */
+    public EasybuyProduct findProductById(String id);
+
+
+
+
 }

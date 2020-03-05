@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ProductImpl extends DataSourceUtil implements IProductDao {
 
-
     public EasybuyProduct toTableClass(ResultSet rs) throws SQLException {
         EasybuyProduct product = new EasybuyProduct();
         product.setId(rs.getInt("id"));
@@ -99,5 +98,25 @@ public class ProductImpl extends DataSourceUtil implements IProductDao {
             num = -1;
         }
         return num;
+    }
+
+    @Override
+    public EasybuyProduct findProductById(String id) {
+        EasybuyProduct product=null;
+        ResultSet rs;
+        try {
+            //编写SQL语句
+            StringBuffer sql = new StringBuffer();
+            sql.append("SELECT * FROM `easybuy_product` where id=?");
+            rs = this.executeQuery(sql.toString(),id);
+            if (rs.next()) {
+                product=toTableClass(rs);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
     }
 }
